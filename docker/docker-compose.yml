@@ -23,5 +23,5 @@ services:
             context: mssql
         ports:
             - "11433:1433"
-        volumes:
-            - ./mssql/data:/var/opt/mssql/data
+#        volumes:
+#            - ./mssql/data:/var/opt/mssql/data
