@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-
 RUN apt-get update && apt-get -y install apt-utils locales && \
     locale-gen en_US.UTF-8 && update-locale
 
@@ -27,6 +26,12 @@ RUN apt-get update && \
     ACCEPT_EULA=Y apt-get -y install msodbcsql && \
     apt-get -y install unixodbc-dev-utf16 && \
     pecl install sqlsrv pdo_sqlsrv
+
+RUN ACCEPT_EULA=Y apt-get -y install msodbcsql17 mssql-tools
+
+RUN ln -sfn /opt/mssql-tools/bin/sqlcmd /usr/bin/sqlcmd
+RUN apt-get -y install freetds-common freetds-bin unixodbc php7.0-sybase
+
 
 RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/fpm/php.ini && \
     echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/fpm/php.ini && \
